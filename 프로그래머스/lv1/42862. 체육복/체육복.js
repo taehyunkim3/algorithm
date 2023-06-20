@@ -1,19 +1,54 @@
 function solution(n, lost, reserve) {
 
     
-    let realReserve = reserve.filter((a)=>!lost.includes(a)).sort((a,b)=>a-b);
-    let realLost = lost.filter((a)=>!reserve.includes(a)).sort((a,b)=>a-b);
+    let doubleReserve = [];
+    let singleReserve = [];
+    let plus = lost.map((a)=>a+1);
+    let minus = lost.map((b)=>b+1);
     
-    let notBorrowed = realLost.filter((a)=>{
-        let found = realReserve.find((b)=>Math.abs(a-b)==1);
-         realReserve = realReserve.filter((c)=>c!==found);
-        if(!found){  //find에 아무것도 없으면
-            return true;
+    for (n of plus){
+        if(minus.includes(n)){
+            doubleReserve.push(n-1);
+        
+        } else{
+            singleReserve.push(n-1);
         }
- 
-        }).length;
+    }
     
-    return n-notBorrowed;
+    for (i in singleReserve){
+        for (j in lost){
+                 if(singleReserve[i]+1 === lost[j]||singleReserve[i]-1 === lost[j]){
+                     lost = lost.splice(j, 1);
+                     singleReserve = singleReserve.splice(i, 1);
+                 }   
+        }
+
+    }
+    
+        for (i in doubleReserve){
+        for (j in lost){
+                 if(doubleReserve[i]+1 === lost[j]||doubleReserve[i]-1 === lost[j]){
+                     lost = lost.splice(j, 1);
+                     doubleReserve = doubleReserve.splice(i, 1);
+                 }   
+        }
+
+    }
+    
+    return n - lost.length
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    return
+    
+    
     
     
 }
