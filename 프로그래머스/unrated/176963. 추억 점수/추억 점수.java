@@ -9,8 +9,7 @@ class Solution {
     
         for(int i = 0; i < name.length; i++){ 
                 map.put(name[i], yearning[i]);
-        }
-        
+        }  
         for(int i = 0; i < photo.length; i++) {
             int temp_score = 0;
             for(int j = 0; j < photo[i].length; j++) {
